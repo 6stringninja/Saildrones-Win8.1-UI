@@ -1,2 +1,2 @@
 # Saildrones-Win8.1-UI
-UI for arduino based bluethooth communications
+RT UI for arduino based bluethooth communications
