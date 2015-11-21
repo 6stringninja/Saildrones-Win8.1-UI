@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -63,7 +64,15 @@ namespace SailDronesUI.Controls
             if (Disconnected != null)
                 Disconnected();
         }
-
+        public async Task<uint> SendMessage(byte[] b)
+        {
+            uint i = 0;
+          string st=  System.Text.UTF8Encoding.UTF8.GetString(b, 0, b.Length)
+                ;
+          
+            i = await router.SendStringMessageAsync(System.Text.UTF8Encoding.UTF8.GetString(b, 0, b.Length));
+            return i;
+        }
         private async void btnConnect_Click(object sender, RoutedEventArgs e)
         {
             if (cboDevices.SelectedItem != null)

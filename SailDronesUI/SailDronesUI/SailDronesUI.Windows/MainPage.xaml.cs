@@ -1,8 +1,11 @@
-﻿using System;
+﻿using SailDronesCommunications;
+using SailDronesCommunications.Packets;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -22,12 +25,25 @@ namespace SailDronesUI
     /// </summary>
     public sealed partial class MainPage : Page
     {
+        Protocol p = new Protocol();
         public MainPage()
         {
             this.InitializeComponent();
             btCon.MessageReceived += BtCon_MessageReceived;
             btCon.Disconnected += BtCon_Disconnected;
             btCon.Connected += BtCon_Connected;
+            p.Update += P_Update;
+            p.SendData += P_SendData;
+        }
+
+        private async void P_SendData(byte[] b)
+        {
+            await btCon.SendMessage(b);
+        }
+
+        private void P_Update(object o, Type t)
+        {
+           
         }
 
         private void BtCon_Connected()
@@ -40,15 +56,21 @@ namespace SailDronesUI
          
         }
 
-        private void BtCon_MessageReceived(byte[] message)
+        private    void BtCon_MessageReceived(byte[] message)
         {
-            string str = System.Text.Encoding.UTF8.GetString(message, 0, message.Length);
-            btCon.SetDebugText(str);
+            p.Process(message);
+      
         }
 
         private void btnConnectionDialog_Click(object sender, RoutedEventArgs e)
         {
             popupConnect.IsOpen = !popupConnect.IsOpen;
+        }
+
+        private void btnTest_Click(object sender, RoutedEventArgs e)
+        {
+            p.ProtocolRequest(SailDronesCommunicationsCommands.Ping);
+
         }
     }
 }

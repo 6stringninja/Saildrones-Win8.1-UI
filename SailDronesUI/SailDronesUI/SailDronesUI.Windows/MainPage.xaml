@@ -18,6 +18,7 @@
             </Grid>
         </Popup>
         <Button x:Name="btnConnectionDialog" Content="Connect.." HorizontalAlignment="Left" VerticalAlignment="Top" Height="45" Width="123" Margin="7,628,0,0" Click="btnConnectionDialog_Click"/>
+        <Button x:Name="btnTest" Content="Test" HorizontalAlignment="Left" VerticalAlignment="Top" Height="45" Width="123" Margin="167,628,0,0" Click="btnTest_Click"  />
 
     </Grid>
 </Page>

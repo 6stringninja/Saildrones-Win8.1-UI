@@ -64,6 +64,33 @@ namespace SailDronesUI.Connect
 
             return ret;
         }
+        public void  SendMessage (byte[] message)
+        {
+            uint sentMessageSize = 0;
+            foreach(byte m in message)
+            _writer.WriteByte(m);
+            if (_writer != null)
+            {
+
+
+                 uint x =  _writer.StoreAsync().GetResults();
+                uint z = x;
+            }
+
+            
+        }
+        public async Task<uint> SendStringMessageAsync(string message)
+        {
+            uint sentMessageSize = 0;
+            if (_writer != null)
+            {
+                uint messageSize = _writer.MeasureString(message);
+                _writer.WriteByte((byte)messageSize);
+                sentMessageSize = _writer.WriteString(message);
+                await _writer.StoreAsync();
+            }
+            return sentMessageSize;
+        }
         public void DisconnectFromDevice()
         {
 
