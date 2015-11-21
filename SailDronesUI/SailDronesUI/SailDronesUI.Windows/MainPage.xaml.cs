@@ -38,9 +38,14 @@ namespace SailDronesUI
 
         private async void P_SendData(byte[] b)
         {
-            await btCon.SendMessage(b);
+            uint abc = await PSendData(b);
+            uint stop = abc;
         }
+        private async Task<uint> PSendData(byte[] b)
+        {
+            return await btCon.SendMessage(b);
 
+        }
         private void P_Update(object o, Type t)
         {
            

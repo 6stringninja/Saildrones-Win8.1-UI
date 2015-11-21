@@ -66,12 +66,12 @@ namespace SailDronesUI.Controls
         }
         public async Task<uint> SendMessage(byte[] b)
         {
-            uint i = 0;
+           
           string st=  System.Text.UTF8Encoding.UTF8.GetString(b, 0, b.Length)
                 ;
           
-            i = await router.SendStringMessageAsync(System.Text.UTF8Encoding.UTF8.GetString(b, 0, b.Length));
-            return i;
+         return  await router.SendStringMessageAsync(System.Text.UTF8Encoding.UTF8.GetString(b, 0, b.Length));
+           
         }
         private async void btnConnect_Click(object sender, RoutedEventArgs e)
         {

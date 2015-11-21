@@ -18,14 +18,28 @@ namespace SailDronesCommunications.Packets
         {
             byte[] _e = new byte[1];
             GPS tmp = ((GPS)(PacketObject));
-
+          
             return _e;
 
         }
 
         public override    void Process(byte[] _b)
         {
-            PacketObject = new GPS();
+            GPS tmp = new GPS()
+            {
+                Satelites = _b[0],
+                lat = BitConverter.ToSingle(_b, 1),
+                lon = BitConverter.ToSingle(_b, 5),
+                heading = BitConverter.ToSingle(_b, 9),
+                speed = BitConverter.ToSingle(_b, 13)
+            };
+        //      public byte Satelites { get; set; }
+        //public float lat { get; set; }
+        //public float lon { get; set; }
+        //public float heading { get; set; }
+        //public float speed { get; set; }
+   
+            PacketObject = tmp; 
         }
         
     }

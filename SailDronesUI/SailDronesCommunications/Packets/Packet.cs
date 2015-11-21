@@ -31,7 +31,7 @@ namespace SailDronesCommunications.Packets
             _currentIndex++;
             tempBytes[_currentIndex] = b;
             tempBytes[4] += 1;
-            tempBytes[5] ^= tempBytes[_currentIndex];
+          //  tempBytes[5] ^= tempBytes[_currentIndex];
             
 
         }
@@ -50,8 +50,8 @@ namespace SailDronesCommunications.Packets
             tempBytes[2] = (byte)'$';
             tempBytes[3] = (byte)SailDronesCommunicationsCommands.Ping;
             tempBytes[4] = (byte)1;
-            tempBytes[5] ^= (byte)tempBytes[3];
-            _currentIndex = 5;
+            //  tempBytes[5] ^= (byte)tempBytes[3];
+            _currentIndex = 4;
 
 
           //  SendData(tempBytes,7);
@@ -65,9 +65,12 @@ namespace SailDronesCommunications.Packets
         {
             if (Send != null)
             {
-                byte[] b2 = new byte[howmany+1];
-                b2[howmany]= 1;
-                for (int i = 0; i < howmany+1; i++)
+                byte[] b2 = new byte[howmany+3];
+               
+                b2[howmany] = (byte)'C';
+                b2[howmany+1] = (byte)'>';
+                b2[howmany+2] = (byte)'#';
+                for (int i = 0; i < howmany; i++)
                 {
                     b2[i] = b[i];
                 }
