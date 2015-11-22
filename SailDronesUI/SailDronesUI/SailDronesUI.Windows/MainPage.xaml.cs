@@ -31,6 +31,8 @@ namespace SailDronesUI
             this.InitializeComponent();
             btCon.MessageReceived += BtCon_MessageReceived;
             btCon.Disconnected += BtCon_Disconnected;
+
+
             btCon.Connected += BtCon_Connected;
             p.Update += P_Update;
             p.SendData += P_SendData;
